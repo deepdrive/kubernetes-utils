@@ -1,0 +1,6 @@
+kubernetes_utils/__pycache__
+.vscode
+build
+dist
+*.egg-info
+*.pyc
