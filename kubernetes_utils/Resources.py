@@ -134,3 +134,40 @@ class Resources(object):
 		
 		# Submit the service to the Kubernetes master
 		return k8s.CoreV1Api().create_namespaced_service(namespace=namespace, body=service)
+	
+	
+	# Secrets
+	
+	@staticmethod
+	def create_secret(namespace, name, data):
+		'''
+		Creates a Kubernetes secret.
+		
+		- `namespace` specifies the namespace in which the secret should be created.
+		- `name` specifies the name of the secret.
+		- `data` is a dictionary of key/value pairs containing the data for the secret.
+		
+		Note that the values in the `data` dictionary should be unencoded, as they will subsequently
+		be base64 encoded by the Kubernetes API itself.
+		'''
+		
+		# Create a Secret object
+		secret = k8s.V1Secret(
+			metadata = k8s.V1ObjectMeta(
+				name = name
+			),
+			data = data
+		)
+		
+		# Submit the secret to the Kubernetes master
+		return k8s.CoreV1Api().create_namespaced_secret(namespace=namespace, body=secret)
+	
+	@staticmethod
+	def read_secret(namespace, name):
+		'''
+		Reads the contents of a Kubernetes secret.
+		
+		- `namespace` specifies the namespace that contains the secret.
+		- `name` specifies the name of the secret.
+		'''
+		return k8s.CoreV1Api().read_namespaced_secret(name=name, namespace=namespace).data
