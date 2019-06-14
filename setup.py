@@ -7,7 +7,7 @@ with open(abspath(join(dirname(__file__), 'README.md')), 'rb') as readmeFile:
 
 setup(
 	name='kubernetes-utils',
-	version='0.0.1',
+	version='0.0.2',
 	description='Utilities for interacting with the Kubernetes client API',
 	long_description=__readme__,
 	long_description_content_type='text/markdown',
